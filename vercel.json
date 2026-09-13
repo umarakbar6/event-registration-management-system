@@ -1,0 +1,4 @@
+{
+  "framework": "nextjs",
+  "buildCommand": "pnpm exec prisma generate --schema=prisma/schema.postgresql.prisma && pnpm exec next build"
+}
