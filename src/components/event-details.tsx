@@ -1,0 +1,29 @@
+"use client";
+
+import Link from "next/link";
+import { ArrowLeft, CalendarDays, CheckCircle2, Clock3, MapPin, Users, Zap } from "lucide-react";
+import { format } from "date-fns";
+import { useParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { getEvent, getUser, registerForEvent } from "@/lib/api";
+import type { EventRecord, SessionUser } from "@/lib/types";
+import { Button, Card, EmptyState, ErrorMessage, PageLoader, StatusBadge } from "./ui";
+import { toast } from "sonner";
+
+export function EventDetails() {
+  const params = useParams<{ id: string }>();
+  const router = useRouter();
+  const [event, setEvent] = useState<EventRecord | null>(null);
+  const [user, setUser] = useState<SessionUser | null>(null);
+  const [busy, setBusy] = useState(true);
+  const [registering, setRegistering] = useState(false);
+  const [error, setError] = useState("");
+  useEffect(() => { Promise.all([getEvent(params.id), getUser()]).then(([eventResponse, userResponse]) => { setEvent(eventResponse.event); setUser(userResponse.user); }).catch((reason) => setError(reason instanceof Error ? reason.message : "Could not load this event.")).finally(() => setBusy(false)); }, [params.id]);
+  async function register() { if (!user) { router.push(`/login?next=/events/${params.id}`); return; } setRegistering(true); try { const response = await registerForEvent(params.id); setEvent((current) => current ? { ...current, seatsTaken: current.seatsTaken + 1, remainingSeats: Math.max(0, current.remainingSeats - 1), registrationStatus: response.registration.status } : current); toast.success(response.message); } catch (reason) { toast.error(reason instanceof Error ? reason.message : "Could not register."); } finally { setRegistering(false); } }
+  if (busy) return <PageLoader />;
+  if (error || !event) return <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6"><EmptyState title="Event not found" text={error || "This event may have been removed or is no longer available."} action={<Link href="/events" className="font-bold text-ocean">Back to events</Link>} /></div>;
+  const full = event.remainingSeats === 0;
+  const started = new Date(event.startDateTime) <= new Date();
+  const canRegister = event.status === "PUBLISHED" && !full && !started && event.registrationStatus !== "ACTIVE";
+  return <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8"><Link href="/events" className="inline-flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-ink"><ArrowLeft size={16} /> Back to events</Link><div className="mt-7 overflow-hidden rounded-[2rem] border border-slate-200/80 bg-white shadow-soft"><div className="relative h-64 bg-slate-100 sm:h-80"><img src={event.imageUrl || "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=1400&q=85"} alt="" className="h-full w-full object-cover" /><div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" /><div className="absolute bottom-6 left-6 right-6 text-white sm:bottom-8 sm:left-10"><div className="mb-3"><StatusBadge status={event.status} /></div><h1 className="max-w-3xl text-3xl font-black tracking-tight sm:text-5xl">{event.title}</h1></div></div><div className="grid gap-10 p-6 sm:p-10 lg:grid-cols-[1fr_330px]"><div><div className="grid gap-4 border-b border-slate-100 pb-8 sm:grid-cols-3"><div className="flex gap-3"><CalendarDays className="mt-0.5 text-ocean" size={19} /><div><p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-400">Date</p><p className="mt-1 text-sm font-bold text-ink">{format(new Date(event.startDateTime), "EEEE, MMM d, yyyy")}</p></div></div><div className="flex gap-3"><Clock3 className="mt-0.5 text-ocean" size={19} /><div><p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-400">Time</p><p className="mt-1 text-sm font-bold text-ink">{format(new Date(event.startDateTime), "h:mm a")} to {format(new Date(event.endDateTime), "h:mm a")}</p></div></div><div className="flex gap-3"><MapPin className="mt-0.5 text-ocean" size={19} /><div><p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-400">Location</p><p className="mt-1 text-sm font-bold text-ink">{event.location}</p></div></div></div><div className="pt-8"><p className="text-xs font-black uppercase tracking-[0.15em] text-ocean">About this event</p><p className="mt-4 whitespace-pre-wrap text-base leading-8 text-slate-600">{event.description}</p></div></div><Card className="h-fit p-6"><div className="flex items-center justify-between"><p className="text-sm font-bold text-slate-500">Availability</p><Users size={18} className="text-ocean" /></div><p className="mt-3 text-4xl font-black tracking-tight text-ink">{event.remainingSeats}</p><p className="text-sm text-slate-500">seats remaining of {event.capacity}</p><div className="mt-5 h-2 overflow-hidden rounded-full bg-slate-100"><div className="h-full rounded-full bg-mint transition-all" style={{ width: `${Math.min(100, (event.seatsTaken / event.capacity) * 100)}%` }} /></div><div className="mt-6">{event.registrationStatus === "ACTIVE" ? <div className="flex items-center gap-2 rounded-xl bg-emerald-50 px-4 py-3 text-sm font-bold text-emerald-700"><CheckCircle2 size={17} /> You are registered</div> : canRegister ? <Button className="w-full" disabled={registering} onClick={register}><Zap size={17} />{registering ? "Saving your seat" : "Register now"}</Button> : <div className="rounded-xl bg-slate-50 px-4 py-3 text-center text-sm font-bold text-slate-600">{event.status === "CANCELLED" ? "Event cancelled" : started ? "Registration closed" : full ? "Event full" : user ? "Registration closed" : "Log in to register"}</div>}{!user && !event.registrationStatus ? <Link href={`/login?next=/events/${event.id}`} className="mt-3 block text-center text-sm font-bold text-ocean hover:underline">Log in to register</Link> : null}</div></Card></div></div></div>;
+}

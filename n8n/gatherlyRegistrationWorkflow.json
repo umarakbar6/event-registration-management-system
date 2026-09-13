@@ -1,0 +1,50 @@
+{
+  "name": "Gatherly registration intake",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "gatherly-registration",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "gatherlyRegistrationWebhook",
+      "name": "Registration received",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [260, 300],
+      "webhookId": "gatherly-registration"
+    },
+    {
+      "parameters": {
+        "jsCode": "const input = $json.body ?? $json;\nconst payload = input.payload ?? input;\nconst suppliedSecret = $headers?.['x-gatherly-secret'] ?? $headers?.['X-Gatherly-Secret'];\nif ($env.GATHERLY_WEBHOOK_SECRET && suppliedSecret !== $env.GATHERLY_WEBHOOK_SECRET) {\n  throw new Error('Webhook secret is not valid.');\n}\nconst required = [payload.registrationId, payload.attendee?.email, payload.attendee?.name, payload.event?.title];\nif (required.some((value) => !value)) {\n  throw new Error('The registration payload is missing required fields.');\n}\nreturn [{ json: {\n  accepted: true,\n  eventType: input.type ?? 'registration.created',\n  receivedAt: new Date().toISOString(),\n  registrationId: payload.registrationId,\n  attendee: { name: payload.attendee.name, email: payload.attendee.email },\n  event: { title: payload.event.title, location: payload.event.location, startDateTime: payload.event.startDateTime },\n  nextAction: 'Connect an email or CRM node here when needed.'\n} }];"
+      },
+      "id": "normalizeRegistration",
+      "name": "Validate and normalize",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [520, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {}
+      },
+      "id": "respondToGatherly",
+      "name": "Return accepted response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [800, 300]
+    }
+  ],
+  "connections": {
+    "Registration received": { "main": [[{ "node": "Validate and normalize", "type": "main", "index": 0 }]] },
+    "Validate and normalize": { "main": [[{ "node": "Return accepted response", "type": "main", "index": 0 }]] }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "versionId": "gatherly-registration-v1",
+  "meta": { "templateCredsSetupCompleted": true },
+  "tags": []
+}

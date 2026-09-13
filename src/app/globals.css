@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: #f4f7fb; color: #132238; font-family: Arial, Helvetica, sans-serif; }
+button, input, textarea, select { font: inherit; }
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible { outline: 3px solid rgba(29, 108, 242, 0.35); outline-offset: 2px; }
+.line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.grid-paper { background-image: linear-gradient(rgba(38, 67, 103, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(38, 67, 103, 0.05) 1px, transparent 1px); background-size: 28px 28px; }
+.hero-glow { background: radial-gradient(circle at 80% 20%, rgba(65, 208, 151, 0.28), transparent 30%), radial-gradient(circle at 15% 70%, rgba(29, 108, 242, 0.12), transparent 32%); }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+.float-slow { animation: float 6s ease-in-out infinite; }
