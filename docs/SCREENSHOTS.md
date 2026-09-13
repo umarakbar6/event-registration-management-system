@@ -1,19 +1,34 @@
 # Gatherly screenshot evidence
 
-The attached AI SKOOL screenshots define the submission evidence. The running product is available at `http://localhost:3000` and the following views are ready for capture at the final hosted URL:
+## Live product
 
-| Capture | Page | Evidence to show |
-| --- | --- | --- |
-| 1 | `/` | Product value, browse events, and account calls to action |
-| 2 | `/events` | Published Nowshera events, search, availability, and sorting |
-| 3 | `/events/[id]` | Event details, capacity, remaining seats, and registration state |
-| 4 | `/dashboard` | Attendee welcome, totals, upcoming registrations, and quick actions |
-| 5 | `/dashboard/registrations` | Personal registration history and cancellation action |
-| 6 | `/admin` | Real statistics and events nearing capacity |
-| 7 | `/admin/events` | Event lifecycle controls and capacity table |
-| 8 | `/admin/registrations` | Attendee list, search, filters, and status controls |
-| 9 | `/admin/reports` | Demand chart, status breakdown, and capacity utilization |
-| 10 | Database schema | `docs/DATABASE_SCHEMA.md` and `prisma/schema.prisma` |
+Live application: https://event-registration-management-syste-six.vercel.app
 
-The Nowshera location update is present in both the database seed and the current local database. Refresh the events page before taking the final capture.
+Public repository: https://github.com/umarakbar6/event-registration-management-system
 
+The live application was reviewed on desktop in the following areas:
+
+| Area | Evidence |
+| --- | --- |
+| Public event discovery | Real published events, capacity, availability, dates, locations, and search controls |
+| Event details | Event description, schedule, location, capacity, remaining seats, and registration state |
+| Attendee dashboard | Welcome panel, real registration totals, upcoming registrations, and quick actions |
+| My registrations | Real registration records, status labels, cancellation action, loading and empty states |
+| Admin dashboard | Real totals for events, registrations, attendees, and events near capacity |
+| Event management | Draft, published, cancelled, and completed states with create and edit controls |
+| Registration management | Attendee list with search, status filters, copy list, and CSV download |
+| Reports | Real registration summary and event capacity utilization |
+
+## Responsive review
+
+The application uses responsive layouts for desktop, tablet, and mobile widths. Navigation, forms, cards, tables, dialogs, and actions remain usable at small widths. Tables can scroll horizontally when needed.
+
+## Accessibility review
+
+Primary forms and actions have visible labels, focus states, keyboard usable controls, semantic headings, and clear error messages.
+
+## Known limitations
+
+The brief excludes online payments, reserved seating, native mobile applications, real SMS infrastructure, QR code check in, multi language support, advanced ticket pricing, and production scale email delivery.
+
+The n8n workflow is included and validated for import. No external n8n account was connected because it is optional in the brief.
