@@ -1,5 +1,10 @@
 # Gatherly
 
+Live application: https://event-registration-management-syste-six.vercel.app
+
+Public GitHub repository: https://github.com/umarakbar6/event-registration-management-system
+
+
 Gatherly is a complete Event Registration and Management System. Attendees can discover events, save a seat, review their registrations, and manage their profile. Administrators can run the event calendar, publish or cancel events, watch capacity, manage registrations, and review real reports.
 
 ## Features
