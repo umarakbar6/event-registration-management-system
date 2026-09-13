@@ -1,0 +1,48 @@
+{
+  "name": "eventregistrationsystem",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "prisma generate && next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test tests/rules.test.mjs",
+    "test:watch": "node --test --watch tests/rules.test.mjs",
+    "test:e2e": "node tests/e2e.mjs",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:push": "prisma db push",
+    "db:reset": "prisma migrate reset --force --skip-seed",
+    "db:seed": "prisma db seed",
+    "db:studio": "prisma studio"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.16.2",
+    "bcryptjs": "^3.0.2",
+    "date-fns": "^4.1.0",
+    "lucide-react": "^0.468.0",
+    "next": "^15.5.2",
+    "next-themes": "^0.4.4",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "recharts": "^2.15.4",
+    "sonner": "^2.0.7",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.0.2",
+    "@types/react-dom": "^19.0.2",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "prisma": "^6.16.2",
+    "tailwindcss": "^3.4.17",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.mjs"
+  }
+}
