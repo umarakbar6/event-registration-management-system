@@ -1,40 +1,50 @@
 # Gatherly delivery checklist
 
-This document is the handover format requested by the AI SKOOL Delivery checklist shown in the attached screenshots. The screenshots are treated as project requirements. They do not replace the user request or grant access to external accounts.
+This is the handover format requested for the AI SKOOL Event Registration and Management System project.
 
 ## Required submission items
 
 | Item | Status | Evidence |
 | --- | --- | --- |
-| Live deployed application URL | Ready locally, external deployment pending | `http://localhost:3000` |
-| GitHub repository with meaningful commits | Local project ready, GitHub remote pending | Project folder and README |
-| README with setup and architecture summary | Complete | `README.md` |
-| Test credentials for Admin and Attendee | Complete | `README.md` and `docs/TESTING_EVIDENCE.md` |
-| Database schema diagram or screenshot | Complete | `docs/DATABASE_SCHEMA.md` |
-| Feature completion checklist | Complete | `docs/FEATURE_COMPLETION_CHECKLIST.md` |
-| Screenshots and known limitations | Complete for local evidence, hosted captures pending | `docs/SCREENSHOTS.md` and `docs/TESTING_EVIDENCE.md` |
-| Short testing evidence | Complete | `docs/TESTING_EVIDENCE.md` |
+| Live deployed application URL | Complete | https://event-registration-management-syste-six.vercel.app |
+| GitHub repository with meaningful commits | Complete | https://github.com/umarakbar6/event-registration-management-system |
+| README with setup and architecture summary | Complete | README.md |
+| Test credentials for Admin and Attendee | Complete | README.md and docs/TESTING_EVIDENCE.md |
+| Database schema diagram or screenshot | Complete | docs/DATABASE_SCHEMA.md |
+| Feature completion checklist | Complete | docs/FEATURE_COMPLETION_CHECKLIST.md |
+| Screenshots and known limitations | Complete | docs/SCREENSHOTS.md and docs/TESTING_EVIDENCE.md |
+| Short testing evidence | Complete | docs/TESTING_EVIDENCE.md |
 
 ## Score audit
 
-| Rubric area | Points | Local result |
+| Rubric area | Points | Result |
 | --- | ---: | --- |
-| Core functionality | 35 | Ready and exercised through the live API workflow |
-| Business rules and data integrity | 20 | Ready with atomic capacity reservation and database constraints |
-| Authentication and security | 15 | Ready with backend authorization, sessions, CSRF, validation, and ownership checks |
-| UX, responsiveness, and accessibility | 15 | Ready with responsive pages, loading states, empty states, errors, focus states, and browser review |
-| Code quality and testing | 10 | Ready with strict TypeScript, organized modules, rule tests, and end to end evidence |
-| Deployment and handover | 5 | Local handover ready. Public URL and GitHub remote still require account access |
+| Core functionality | 35 | Complete and verified on the live application |
+| Business rules and data integrity | 20 | Complete with atomic capacity control and duplicate prevention |
+| Authentication and security | 15 | Complete with backend authorization, sessions, CSRF, validation, and ownership checks |
+| UX, responsiveness, and accessibility | 15 | Complete with responsive pages, clear states, focus states, and accessible controls |
+| Code quality and testing | 10 | Complete with strict TypeScript, organized modules, automated tests, and live smoke review |
+| Deployment and handover | 5 | Complete with live Vercel deployment, public GitHub repository, README, credentials, schema, evidence, and limitations |
 
-The local implementation is prepared for the full 100 point rubric. The only items that cannot be completed inside this local workspace are the public URL and GitHub remote. Those two external items must be connected before claiming a final 100 point submission.
+Final scoring remains subject to evaluator review of the live product and evidence.
 
-## Final run order
+## Verification completed
 
-1. Set production environment values.
-2. Connect PostgreSQL and run the reviewed migration.
-3. Run the seed only in a development database.
-4. Deploy the application and record the public URL.
-5. Push the project to GitHub with meaningful commits.
-6. Capture the pages listed in `docs/SCREENSHOTS.md`.
-7. Replace development credentials before sharing the public URL.
+* Production values are set in Vercel.
+* Neon PostgreSQL is connected and seeded for evaluation.
+* Attendee login, event discovery, capacity display, logout, and protected route behavior were verified.
+* Admin login, event management, registration management, reports, and attendee exports were verified.
+* All seeded locations use Nowshera.
+* The project uses meaningful repository commits.
 
+## Demo credentials
+
+Admin: admin@example.com / Admin123!
+
+Attendee: alex@example.com / Attendee123!
+
+These credentials are for development and evaluation only.
+
+## Out of scope
+
+Online payments, reserved seating, native mobile apps, real SMS infrastructure, QR code check in, multi language support, advanced ticket pricing, and production scale email delivery are not included in the brief.
