@@ -2,9 +2,11 @@ import { NextRequest } from "next/server";
 import { prisma } from "@/lib/db";
 import { requireUser } from "@/lib/auth";
 import { AppError, errorResponse, success } from "@/lib/errors";
+import { readJson } from "@/lib/http";
 import { requireCsrf } from "@/lib/security";
 import { serializeRegistration } from "@/lib/serializers";
 import { cancelRegistration } from "@/lib/registrationService";
+import { registrationStatusSchema } from "@/lib/validation";
 
 type Context = { params: Promise<{ id: string }> };
 
@@ -26,11 +28,9 @@ export async function PATCH(request: NextRequest, context: Context) {
     const user = await requireUser();
     if (user.role !== "ADMIN") throw new AppError("FORBIDDEN", "Only administrators can manage other registrations.", 403);
     const { id } = await context.params;
-    const body = await request.json() as { status?: string };
-    if (!["ACTIVE", "CANCELLED", "ATTENDED", "NO_SHOW"].includes(body.status ?? "")) throw new AppError("INVALID_STATUS", "That registration status is not valid.", 422);
+    const { status: nextStatus } = registrationStatusSchema.parse(await readJson(request));
     const current = await prisma.registration.findUnique({ where: { id }, include: { event: true } });
     if (!current) throw new AppError("REGISTRATION_NOT_FOUND", "Registration not found.", 404);
-    const nextStatus = body.status!;
     const wasActive = current.status === "ACTIVE";
     const willBeActive = nextStatus === "ACTIVE";
     const registration = await prisma.$transaction(async (transaction) => {
