@@ -6,7 +6,7 @@ Gatherly is a complete Event Registration and Management System. Attendees can d
 
 Attendee accounts use secure password hashing and database sessions. Event discovery supports search, availability filters, and sorting. Registration uses a database transaction with an atomic seat reservation and a unique user and event constraint, so the final seat cannot be sold twice. Admin pages use server side role checks, real database statistics, event management, attendee management, and reports.
 
-The project also includes loading states, empty states, friendly errors, toast notices, responsive layouts, accessible labels and focus states, and a ready to import n8n workflow.
+The project also includes loading states, empty states, friendly errors, toast notices, responsive layouts, accessible labels, and focus states.
 
 ## Submission pack
 
@@ -117,4 +117,4 @@ Run the critical registration rule tests with `pnpm test`. Run the strict TypeSc
 
 Passwords are never stored directly. Session tokens are random opaque values and only keyed HMAC SHA 256 hashes are stored. Session cookies are HTTP only and same site. Mutations use a double submit CSRF token. Input is validated with Zod. Database access uses Prisma parameters. Attendee queries are scoped to the signed in user, while admin access is checked on the server. Errors returned to the browser are sanitized.
 
-Set `secure` cookies through production HTTPS, use a strong secret, use a managed PostgreSQL service, restrict database access, configure backups, and review n8n credentials before a public deployment.
+Set `secure` cookies through production HTTPS, use a strong secret, use a managed PostgreSQL service, restrict database access, and configure backups before a public deployment.
