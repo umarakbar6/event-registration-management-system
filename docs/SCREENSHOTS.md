@@ -17,4 +17,14 @@ The submission includes captures from the deployed Gatherly application and the 
 | 11 | `/admin/reports` | Demand chart, status breakdown, and capacity utilization | `docs/screenshots/11-admin-reports.png` |
 | 12 | Database schema | Entity relationships from `docs/DATABASE_SCHEMA.md` and `prisma/schema.prisma` | `docs/screenshots/12-database-schema.png` |
 
+## Responsive evidence
+
+The following captures were taken from the deployed application at a 390px mobile viewport:
+
+| Capture | Page | Evidence to show | Stored file |
+| --- | --- | --- | --- |
+| Mobile 1 | `/events` | Collapsed navigation, stacked filters, and responsive event cards | `docs/screenshots/mobile-events.png` |
+| Mobile 2 | `/dashboard/registrations` | Responsive attendee history, status filters, and feedback state | `docs/screenshots/mobile-dashboard-registrations.png` |
+| Mobile 3 | `/admin/reports` | Responsive report cards, charts, and capacity table | `docs/screenshots/mobile-admin-reports.png` |
+
 The Nowshera location update is present in the database seed and the deployed event data. The admin report capture also shows full-capacity events as `At capacity`, while `Cancelled` is reserved for genuinely cancelled events.

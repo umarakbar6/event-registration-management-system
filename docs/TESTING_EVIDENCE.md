@@ -10,7 +10,7 @@ The following checks passed against the current project:
 | `pnpm test` | Passed, 12 critical rule tests |
 | `pnpm build` | Passed, all pages and API routes compiled |
 | `pnpm test:e2e` | Passed against the running application and real database |
-| Feedback workflow review | Passed: attendee UI and client helper are wired, only attended events after their end time qualify, and a second submission is rejected |
+| Profile, registration-status, and feedback E2E coverage | Passed: profile edits, Zod status validation, admin status transitions, attended-event feedback, and duplicate feedback rejection are exercised |
 | n8n JSON parse | Passed |
 | n8n Code node syntax | Passed |
 | Browser console error check | No errors on the verified events page |
@@ -26,11 +26,15 @@ The live API acceptance script verifies:
 5. Valid registration.
 6. Duplicate registration rejection.
 7. Attendee cancellation and seat release.
-8. Admin login and real statistics.
-9. Admin draft event creation.
-10. Draft publication.
-11. Safe deletion protection for published events.
-12. Draft cleanup after the test.
+8. Profile update for the newly created attendee.
+9. Admin login and real statistics.
+10. Invalid status rejection through Zod validation.
+11. Admin reactivation and no-show status transitions.
+12. Admin draft event creation and publication.
+13. Registration for a completed test event.
+14. Attended status and feedback submission.
+15. Duplicate feedback rejection.
+16. Safe deletion protection for events with registration history.
 
 The script is `tests/e2e.mjs`. The rule suite is `tests/rules.test.mjs`.
 
@@ -47,6 +51,6 @@ Attendee: `alex@example.com` with password `Attendee123!`
 1. The live app is deployed at https://event-registration-management-syste-six.vercel.app and was reviewed after deployment.
 2. The public repository is https://github.com/umarakbar6/event-registration-management-system.
 3. The n8n workflow is importable and the application webhook sender is implemented. It is not connected to an external n8n account yet.
-4. SQLite remains available for self contained local review. The live deployment uses the PostgreSQL schema option and a seeded Neon database. The PostgreSQL database was initialized with the reviewed schema.
+4. SQLite remains available for self contained local review. The live deployment uses the PostgreSQL schema option and a seeded Neon database. The PostgreSQL database was initialized with the reviewed schema. The feedback E2E check intentionally creates a completed QA event so its history cannot be deleted through the safe-delete API.
 5. Event images use public Unsplash image URLs for demo presentation. A production deployment can replace them with managed asset storage.
 6. Payments, QR check in, reserved seating, SMS infrastructure, advanced ticket pricing, and production scale email delivery are outside the supplied project scope.
