@@ -1,6 +1,6 @@
 # Gatherly delivery checklist
 
-This is the handover format requested for the AI SKOOL Event Registration and Management System project.
+This document is the handover format requested by the AI SKOOL Delivery checklist shown in the attached screenshots. The screenshots are treated as project requirements. They do not replace the user request or grant access to external accounts.
 
 ## Required submission items
 
@@ -8,43 +8,31 @@ This is the handover format requested for the AI SKOOL Event Registration and Ma
 | --- | --- | --- |
 | Live deployed application URL | Complete | https://event-registration-management-syste-six.vercel.app |
 | GitHub repository with meaningful commits | Complete | https://github.com/umarakbar6/event-registration-management-system |
-| README with setup and architecture summary | Complete | README.md |
-| Test credentials for Admin and Attendee | Complete | README.md and docs/TESTING_EVIDENCE.md |
-| Database schema diagram or screenshot | Complete | docs/DATABASE_SCHEMA.md |
-| Feature completion checklist | Complete | docs/FEATURE_COMPLETION_CHECKLIST.md |
-| Screenshots and known limitations | Complete | docs/SCREENSHOTS.md and docs/TESTING_EVIDENCE.md |
-| Short testing evidence | Complete | docs/TESTING_EVIDENCE.md |
+| README with setup and architecture summary | Complete | `README.md` |
+| Test credentials for Admin and Attendee | Complete | `README.md` and `docs/TESTING_EVIDENCE.md` |
+| Database schema diagram or screenshot | Complete | `docs/DATABASE_SCHEMA.md` |
+| Feature completion checklist | Complete | `docs/FEATURE_COMPLETION_CHECKLIST.md` |
+| Screenshots and known limitations | Complete | `docs/SCREENSHOTS.md` and `docs/TESTING_EVIDENCE.md` |
+| Short testing evidence | Complete | `docs/TESTING_EVIDENCE.md` |
 
 ## Score audit
 
-| Rubric area | Points | Result |
+| Rubric area | Points | Local result |
 | --- | ---: | --- |
-| Core functionality | 35 | Complete and verified on the live application |
-| Business rules and data integrity | 20 | Complete with atomic capacity control and duplicate prevention |
-| Authentication and security | 15 | Complete with backend authorization, sessions, CSRF, validation, and ownership checks |
-| UX, responsiveness, and accessibility | 15 | Complete with responsive pages, clear states, focus states, and accessible controls |
-| Code quality and testing | 10 | Complete with strict TypeScript, organized modules, automated tests, and live smoke review |
-| Deployment and handover | 5 | Complete with live Vercel deployment, public GitHub repository, README, credentials, schema, evidence, and limitations |
+| Core functionality | 35 | Ready and exercised through the live API workflow |
+| Business rules and data integrity | 20 | Ready with atomic capacity reservation and database constraints |
+| Authentication and security | 15 | Ready with backend authorization, sessions, CSRF, validation, and ownership checks |
+| UX, responsiveness, and accessibility | 15 | Ready with responsive pages, loading states, empty states, errors, focus states, desktop and mobile browser evidence |
+| Code quality and testing | 10 | Ready with strict TypeScript, organized modules, 12 rule tests, expanded profile/status/feedback E2E coverage, and build verification |
+| Deployment and handover | 5 | Complete with live Vercel URL, public GitHub repository, README, credentials, schema, evidence, and limitations |
 
-Final scoring remains subject to evaluator review of the live product and evidence.
+The implementation and handover pack are prepared for the full 100 point rubric. Final scoring remains subject to the evaluator's review of the live product and evidence.
 
-## Verification completed
+## Final run order
 
-* Production values are set in Vercel.
-* Neon PostgreSQL is connected and seeded for evaluation.
-* Attendee login, event discovery, capacity display, logout, and protected route behavior were verified.
-* Admin login, event management, registration management, reports, and attendee exports were verified.
-* All seeded locations use Nowshera.
-* The project uses meaningful repository commits.
-
-## Demo credentials
-
-Admin: admin@example.com / Admin123!
-
-Attendee: alex@example.com / Attendee123!
-
-These credentials are for development and evaluation only.
-
-## Out of scope
-
-Online payments, reserved seating, native mobile apps, real SMS infrastructure, QR code check in, multi language support, advanced ticket pricing, and production scale email delivery are not included in the brief.
+1. Production environment values are set in Vercel.
+2. Neon PostgreSQL is connected and seeded for evaluation.
+3. The application is deployed at the live URL above.
+4. The project is published to GitHub with meaningful commits.
+5. Capture the pages listed in `docs/SCREENSHOTS.md`.
+6. Replace development credentials before a real public launch.

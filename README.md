@@ -48,6 +48,16 @@ The submission includes real captures of the public attendee journey, authentica
 
 ![Gatherly database schema](docs/screenshots/12-database-schema.png)
 
+### Mobile responsive evidence
+
+These captures show the same deployed application at a 390px mobile viewport, including the attendee and administrator flows.
+
+![Gatherly mobile events](docs/screenshots/mobile-events.png)
+
+![Gatherly mobile attendee registrations](docs/screenshots/mobile-dashboard-registrations.png)
+
+![Gatherly mobile admin reports](docs/screenshots/mobile-admin-reports.png)
+
 ## Live deployment
 
 Live application: https://event-registration-management-syste-six.vercel.app
