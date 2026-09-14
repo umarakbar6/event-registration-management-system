@@ -1,34 +1,20 @@
 # Gatherly screenshot evidence
 
-## Live product
+The submission includes captures from the deployed Gatherly application and the database schema. The live application is available at https://event-registration-management-syste-six.vercel.app. Every capture listed below is stored in this repository under `docs/screenshots/` and is rendered in the README.
 
-Live application: https://event-registration-management-syste-six.vercel.app
+| Capture | Page | Evidence to show | Stored file |
+| --- | --- | --- | --- |
+| 1 | `/` | Product value, browse events, and account calls to action | `docs/screenshots/01-home.png` |
+| 2 | `/events` | Published events, search, availability, and sorting | `docs/screenshots/02-events.png` |
+| 3 | `/events/[id]` | Event details, capacity, remaining seats, and registration state | `docs/screenshots/03-event-details.png` |
+| 4 | `/login` | Attendee sign-in form and validation entry point | `docs/screenshots/04-login.png` |
+| 5 | `/register` | Attendee account creation form | `docs/screenshots/05-register.png` |
+| 6 | `/dashboard` | Attendee welcome, totals, upcoming registrations, and quick actions | `docs/screenshots/06-dashboard.png` |
+| 7 | `/dashboard/registrations` | Personal history, cancellation action, and completed-event feedback UI | `docs/screenshots/07-dashboard-registrations.png` |
+| 8 | `/admin` | Real statistics and events nearing capacity | `docs/screenshots/08-admin.png` |
+| 9 | `/admin/events` | Event lifecycle controls and capacity table | `docs/screenshots/09-admin-events.png` |
+| 10 | `/admin/registrations` | Attendee list, search, filters, and status controls | `docs/screenshots/10-admin-registrations.png` |
+| 11 | `/admin/reports` | Demand chart, status breakdown, and capacity utilization | `docs/screenshots/11-admin-reports.png` |
+| 12 | Database schema | Entity relationships from `docs/DATABASE_SCHEMA.md` and `prisma/schema.prisma` | `docs/screenshots/12-database-schema.png` |
 
-Public repository: https://github.com/umarakbar6/event-registration-management-system
-
-The live application was reviewed on desktop in the following areas:
-
-| Area | Evidence |
-| --- | --- |
-| Public event discovery | Real published events, capacity, availability, dates, locations, and search controls |
-| Event details | Event description, schedule, location, capacity, remaining seats, and registration state |
-| Attendee dashboard | Welcome panel, real registration totals, upcoming registrations, and quick actions |
-| My registrations | Real registration records, status labels, cancellation action, loading and empty states |
-| Admin dashboard | Real totals for events, registrations, attendees, and events near capacity |
-| Event management | Draft, published, cancelled, and completed states with create and edit controls |
-| Registration management | Attendee list with search, status filters, copy list, and CSV download |
-| Reports | Real registration summary and event capacity utilization |
-
-## Responsive review
-
-The application uses responsive layouts for desktop, tablet, and mobile widths. Navigation, forms, cards, tables, dialogs, and actions remain usable at small widths. Tables can scroll horizontally when needed.
-
-## Accessibility review
-
-Primary forms and actions have visible labels, focus states, keyboard usable controls, semantic headings, and clear error messages.
-
-## Known limitations
-
-The brief excludes online payments, reserved seating, native mobile applications, real SMS infrastructure, QR code check in, multi language support, advanced ticket pricing, and production scale email delivery.
-
-The n8n workflow is included and validated for import. No external n8n account was connected because it is optional in the brief.
+The Nowshera location update is present in the database seed and the deployed event data. The admin report capture also shows full-capacity events as `At capacity`, while `Cancelled` is reserved for genuinely cancelled events.

@@ -1,57 +1,52 @@
 # Gatherly testing evidence
 
-## Live verification
-
-Live application: https://event-registration-management-syste-six.vercel.app
-
-Public repository: https://github.com/umarakbar6/event-registration-management-system
-
-The deployed application uses Neon PostgreSQL with the seeded evaluation data.
-
 ## Automated checks
+
+The following checks passed against the current project:
 
 | Check | Result |
 | --- | --- |
-| pnpm typecheck | Passed |
-| pnpm test | Passed, 12 critical business rule tests |
-| pnpm build | Passed, all pages and API routes compiled |
-| pnpm test:e2e | Passed against the application and real database |
-| n8n workflow JSON parse | Passed |
+| `pnpm typecheck` | Passed |
+| `pnpm test` | Passed, 12 critical rule tests |
+| `pnpm build` | Passed, all pages and API routes compiled |
+| `pnpm test:e2e` | Passed against the running application and real database |
+| Feedback workflow review | Passed: attendee UI and client helper are wired, only attended events after their end time qualify, and a second submission is rejected |
+| n8n JSON parse | Passed |
 | n8n Code node syntax | Passed |
-| Browser console review | No errors on the verified events page |
+| Browser console error check | No errors on the verified events page |
 
-## Live smoke review
+## End to end evidence
 
-The following behavior was verified on the deployed application:
+The live API acceptance script verifies:
 
-1. Public event discovery loads real database records.
-2. Event capacity and remaining seats are shown correctly.
-3. Attendee login succeeds with the evaluation account.
-4. Attendee dashboard shows real registrations and Nowshera event locations.
-5. Attendee access to the admin area is denied by the server.
-6. Logout succeeds and a signed out user is redirected to login for protected pages.
-7. Admin login succeeds with the evaluation account.
-8. Admin dashboard shows real event, registration, attendee, and capacity totals.
-9. Admin event management shows draft, published, cancelled, and completed events.
-10. Admin registration management shows real attendee records and export controls.
-11. Reports show registration counts and capacity utilization from the database.
+1. Public event discovery.
+2. A new attendee registration.
+3. Attendee denial for admin event creation.
+4. Full event rejection.
+5. Valid registration.
+6. Duplicate registration rejection.
+7. Attendee cancellation and seat release.
+8. Admin login and real statistics.
+9. Admin draft event creation.
+10. Draft publication.
+11. Safe deletion protection for published events.
+12. Draft cleanup after the test.
 
-## Business rule evidence
+The script is `tests/e2e.mjs`. The rule suite is `tests/rules.test.mjs`.
 
-The automated acceptance flow verifies public discovery, valid registration, attendee denial for admin event creation, full event rejection, duplicate registration rejection, attendee cancellation, and seat release.
+## Demo credentials
 
-The registration service uses a database transaction with an atomic capacity update and a unique active registration constraint. This prevents duplicate active records and prevents the final seat from being assigned twice.
+These are development credentials only.
 
-## Evaluation accounts
+Admin: `admin@example.com` with password `Admin123!`
 
-Admin: admin@example.com / Admin123!
+Attendee: `alex@example.com` with password `Attendee123!`
 
-Attendee: alex@example.com / Attendee123!
+## Known limitations and honest handover notes
 
-These accounts are for development and evaluation only.
-
-## Known limitations
-
-The brief excludes online payments, reserved seating, native mobile applications, real SMS infrastructure, QR code check in, multi language support, advanced ticket pricing, and production scale email delivery.
-
-The n8n workflow is included and validated for import. No external n8n account was connected because it is optional in the brief.
+1. The live app is deployed at https://event-registration-management-syste-six.vercel.app and was reviewed after deployment.
+2. The public repository is https://github.com/umarakbar6/event-registration-management-system.
+3. The n8n workflow is importable and the application webhook sender is implemented. It is not connected to an external n8n account yet.
+4. SQLite remains available for self contained local review. The live deployment uses the PostgreSQL schema option and a seeded Neon database. The PostgreSQL database was initialized with the reviewed schema.
+5. Event images use public Unsplash image URLs for demo presentation. A production deployment can replace them with managed asset storage.
+6. Payments, QR check in, reserved seating, SMS infrastructure, advanced ticket pricing, and production scale email delivery are outside the supplied project scope.
