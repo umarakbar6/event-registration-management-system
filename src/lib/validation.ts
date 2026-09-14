@@ -34,3 +34,7 @@ export const eventPatchSchema = z.object({ ...eventFields, status: eventFields.s
 export const feedbackSchema = z.object({ eventId: z.string().cuid(), rating: z.coerce.number().int().min(1).max(5), comment: z.string().trim().min(5).max(1000) });
 
 export const profileSchema = z.object({ name: z.string().trim().min(2).max(80) });
+
+export const registrationStatusSchema = z.object({
+  status: z.enum(["ACTIVE", "CANCELLED", "ATTENDED", "NO_SHOW"]),
+});
