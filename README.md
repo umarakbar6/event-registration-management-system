@@ -1,10 +1,5 @@
 # Gatherly
 
-Live application: https://event-registration-management-syste-six.vercel.app
-
-Public GitHub repository: https://github.com/umarakbar6/event-registration-management-system
-
-
 Gatherly is a complete Event Registration and Management System. Attendees can discover events, save a seat, review their registrations, and manage their profile. Administrators can run the event calendar, publish or cancel events, watch capacity, manage registrations, and review real reports.
 
 ## Features
@@ -16,6 +11,32 @@ The project also includes loading states, empty states, friendly errors, toast n
 ## Submission pack
 
 The delivery evidence requested by the project brief is organized in `DELIVERY_CHECKLIST.md`. The database diagram is in `docs/DATABASE_SCHEMA.md`, the feature evidence is in `docs/FEATURE_COMPLETION_CHECKLIST.md`, testing evidence and known limitations are in `docs/TESTING_EVIDENCE.md`, and the final screenshot list is in `docs/SCREENSHOTS.md`.
+
+## Application screenshots
+
+These are screenshots of the deployed Gatherly application, captured from the live site and stored in `docs/screenshots`.
+
+### Public experience
+
+![Gatherly home page](docs/screenshots/01-home.png)
+
+![Gatherly events listing](docs/screenshots/02-events.png)
+
+![Gatherly event details](docs/screenshots/03-event-details.png)
+
+![Gatherly login page](docs/screenshots/04-login.png)
+
+![Gatherly registration page](docs/screenshots/05-register.png)
+
+Protected dashboard and admin evidence is listed in `docs/SCREENSHOTS.md` and the delivery checklist.
+
+## Live deployment
+
+Live application: https://event-registration-management-syste-six.vercel.app
+
+Public GitHub repository: https://github.com/umarakbar6/event-registration-management-system
+
+The live application uses Vercel and a seeded Neon PostgreSQL database. Demo credentials are listed below and are intended for evaluation only.
 
 ## Technology
 
