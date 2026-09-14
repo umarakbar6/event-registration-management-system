@@ -21,12 +21,13 @@ export function serializeEvent(event: { id: string; title: string; description: 
   };
 }
 
-export function serializeRegistration(registration: { id: string; status: string; registeredAt: Date; cancelledAt: Date | null; event: Parameters<typeof serializeEvent>[0]; user?: { id: string; name: string; email: string } | null }): RegistrationRecord {
+export function serializeRegistration(registration: { id: string; status: string; registeredAt: Date; cancelledAt: Date | null; event: Parameters<typeof serializeEvent>[0]; user?: { id: string; name: string; email: string } | null }, feedbackSubmitted = false): RegistrationRecord {
   return {
     id: registration.id,
     status: registration.status as RegistrationRecord["status"],
     registeredAt: registration.registeredAt.toISOString(),
     cancelledAt: registration.cancelledAt?.toISOString() ?? null,
+    feedbackSubmitted,
     event: serializeEvent(registration.event),
     user: registration.user ? { id: registration.user.id, name: registration.user.name, email: registration.user.email } : undefined,
   };

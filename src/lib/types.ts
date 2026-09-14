@@ -32,6 +32,7 @@ export type RegistrationRecord = {
   status: RegistrationStatus;
   registeredAt: string;
   cancelledAt: string | null;
+  feedbackSubmitted?: boolean;
   event: Pick<EventRecord, "id" | "title" | "location" | "startDateTime" | "endDateTime" | "status" | "capacity" | "seatsTaken" | "remainingSeats" | "imageUrl">;
   user?: Pick<SessionUser, "id" | "name" | "email">;
 };

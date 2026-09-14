@@ -34,6 +34,7 @@ export const registerForEvent = (id: string) => apiRequest<{ registration: Regis
 export const getRegistrations = (query = "") => apiRequest<{ registrations: RegistrationRecord[]; pagination: { page: number; pageSize: number; total: number; totalPages: number } }>(`/api/registrations${query}`);
 export const cancelRegistration = (id: string) => apiRequest<{ registration: RegistrationRecord; message: string }>(`/api/registrations/${id}`, { method: "DELETE" });
 export const updateRegistration = (id: string, status: string) => apiRequest<{ registration: RegistrationRecord; message: string }>(`/api/registrations/${id}`, { method: "PATCH", body: JSON.stringify({ status }) });
+export const submitFeedback = (eventId: string, rating: number, comment: string) => apiRequest<{ feedback: { id: string }; message: string }>("/api/feedback", { method: "POST", body: JSON.stringify({ eventId, rating, comment }) });
 export const getStatistics = () => apiRequest<{ stats: DashboardStats; report: ReportData }>("/api/admin/statistics");
 export const updateProfile = (name: string) => apiRequest<{ user: SessionUser; message: string }>("/api/profile", { method: "PATCH", body: JSON.stringify({ name }) });
 export const logout = () => apiRequest<{ message: string }>("/api/auth/logout", { method: "POST", body: "{}" });
