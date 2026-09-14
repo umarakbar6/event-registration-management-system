@@ -14,13 +14,13 @@ The delivery evidence requested by the project brief is organized in `DELIVERY_C
 
 ## Application screenshots
 
-These are screenshots of the deployed Gatherly application, captured from the live site and stored in `docs/screenshots`.
+The submission includes real captures of the public attendee journey, authenticated attendee pages, authenticated admin pages, and the database schema. The complete evidence index is in `docs/SCREENSHOTS.md`.
 
-### Public experience
+### Public and authentication
 
 ![Gatherly home page](docs/screenshots/01-home.png)
 
-![Gatherly events listing](docs/screenshots/02-events.png)
+![Gatherly events page](docs/screenshots/02-events.png)
 
 ![Gatherly event details](docs/screenshots/03-event-details.png)
 
@@ -28,7 +28,25 @@ These are screenshots of the deployed Gatherly application, captured from the li
 
 ![Gatherly registration page](docs/screenshots/05-register.png)
 
-Protected dashboard and admin evidence is listed in `docs/SCREENSHOTS.md` and the delivery checklist.
+### Attendee journey
+
+![Gatherly attendee dashboard](docs/screenshots/06-dashboard.png)
+
+![Gatherly attendee registrations and feedback](docs/screenshots/07-dashboard-registrations.png)
+
+### Admin journey
+
+![Gatherly admin dashboard](docs/screenshots/08-admin.png)
+
+![Gatherly admin events](docs/screenshots/09-admin-events.png)
+
+![Gatherly admin registrations](docs/screenshots/10-admin-registrations.png)
+
+![Gatherly admin reports](docs/screenshots/11-admin-reports.png)
+
+### Database
+
+![Gatherly database schema](docs/screenshots/12-database-schema.png)
 
 ## Live deployment
 
@@ -77,7 +95,7 @@ Authentication uses `POST /api/auth/register`, `POST /api/auth/login`, `POST /ap
 
 Events use `GET /api/events`, `GET /api/events/:id`, `POST /api/events`, `PATCH /api/events/:id`, `DELETE /api/events/:id`, and `POST /api/events/:id/register`.
 
-Registrations use `GET /api/registrations`, `DELETE /api/registrations/:id`, and `PATCH /api/registrations/:id` for admin status changes. Admin reporting uses `GET /api/admin/statistics`. Profile updates use `GET` and `PATCH /api/profile`.
+Registrations use `GET /api/registrations`, `DELETE /api/registrations/:id`, and `PATCH /api/registrations/:id` for admin status changes. Feedback uses `POST /api/feedback` and is limited to one submission per attendee for an attended event that has ended. Admin reporting uses `GET /api/admin/statistics`. Profile updates use `GET` and `PATCH /api/profile`.
 
 Mutation requests must include the `x-csrf-token` header returned by `GET /api/auth/csrf`. Admin endpoints verify the session role on the server.
 
