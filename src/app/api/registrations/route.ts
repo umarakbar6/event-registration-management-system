@@ -16,7 +16,10 @@ export async function GET(request: NextRequest) {
       prisma.registration.findMany({ where, include: { event: true, user: { select: { id: true, name: true, email: true } } }, orderBy: { registeredAt: "desc" }, skip: (page - 1) * pageSize, take: pageSize }),
       prisma.registration.count({ where }),
     ]);
-    return success({ registrations: registrations.map((registration) => serializeRegistration(registration)), pagination: { page, pageSize, total, totalPages: Math.ceil(total / pageSize) } });
+    const feedbackEventIds = user.role === "ATTENDEE" && registrations.length
+      ? new Set((await prisma.feedback.findMany({ where: { userId: user.id, eventId: { in: registrations.map((registration) => registration.eventId) } }, select: { eventId: true } })).map((feedback) => feedback.eventId))
+      : new Set<string>();
+    return success({ registrations: registrations.map((registration) => serializeRegistration(registration, feedbackEventIds.has(registration.eventId))), pagination: { page, pageSize, total, totalPages: Math.ceil(total / pageSize) } });
   } catch (error) {
     return errorResponse(error);
   }
