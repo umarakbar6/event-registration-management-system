@@ -11,7 +11,11 @@ export async function GET(request: NextRequest) {
     const page = positiveInt(queryValue(request, "page"), 1);
     const pageSize = Math.min(50, positiveInt(queryValue(request, "pageSize"), 20));
     const status = queryValue(request, "status");
-    const where = user.role === "ADMIN" && queryValue(request, "scope") === "admin" ? (status ? { status } : {}) : { userId: user.id, ...(status ? { status } : {}) };
+    const eventId = queryValue(request, "eventId");
+    const isAdminScope = user.role === "ADMIN" && queryValue(request, "scope") === "admin";
+    const where = isAdminScope
+      ? { ...(status ? { status } : {}), ...(eventId ? { eventId } : {}) }
+      : { userId: user.id, ...(status ? { status } : {}), ...(eventId ? { eventId } : {}) };
     const [registrations, total] = await prisma.$transaction([
       prisma.registration.findMany({ where, include: { event: true, user: { select: { id: true, name: true, email: true } } }, orderBy: { registeredAt: "desc" }, skip: (page - 1) * pageSize, take: pageSize }),
       prisma.registration.count({ where }),
