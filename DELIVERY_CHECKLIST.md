@@ -14,6 +14,7 @@ This document is the handover format requested by the AI SKOOL Delivery checklis
 | Feature completion checklist | Complete | `docs/FEATURE_COMPLETION_CHECKLIST.md` |
 | Screenshots and known limitations | Complete | `docs/SCREENSHOTS.md` and `docs/TESTING_EVIDENCE.md` |
 | Short testing evidence | Complete | `docs/TESTING_EVIDENCE.md` |
+| Individual screen recording for every verification case | Pending | The automated pass/fail index is in `docs/test-records/latest.md` and `docs/test-records/latest.json`; attach one screen recording per case before MyDesk submission. |
 
 ## Score audit
 
@@ -23,7 +24,7 @@ This document is the handover format requested by the AI SKOOL Delivery checklis
 | Business rules and data integrity | 20 | Ready with atomic capacity reservation and database constraints |
 | Authentication and security | 15 | Ready with backend authorization, sessions, CSRF, validation, and ownership checks |
 | UX, responsiveness, and accessibility | 15 | Ready with responsive pages, loading states, empty states, errors, focus states, desktop and mobile browser evidence |
-| Code quality and testing | 10 | Ready with strict TypeScript, organized modules, 12 rule tests, expanded profile/status/feedback E2E coverage, and build verification |
+| Code quality and testing | 10 | Ready with strict TypeScript, organized modules, 12 automated rule tests, the 10 updated PRD acceptance cases, and build verification; screen-recording evidence remains to be attached |
 | Deployment and handover | 5 | Complete with live Vercel URL, public GitHub repository, README, credentials, schema, evidence, and limitations |
 
 The implementation and handover pack are prepared for the full 100 point rubric. Final scoring remains subject to the evaluator's review of the live product and evidence.
@@ -34,5 +35,7 @@ The implementation and handover pack are prepared for the full 100 point rubric.
 2. Neon PostgreSQL is connected and seeded for evaluation.
 3. The application is deployed at the live URL above.
 4. The project is published to GitHub with meaningful commits.
-5. Capture the pages listed in `docs/SCREENSHOTS.md`.
-6. Replace development credentials before a real public launch.
+5. Run `pnpm test:record` and include `docs/test-records/latest.md` with the submission.
+6. Capture the pages listed in `docs/SCREENSHOTS.md`.
+7. Record each individual verification case on screen and attach the recordings in the MyDesk format shown in the submission guide.
+8. Replace development credentials before a real public launch.
