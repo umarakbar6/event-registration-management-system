@@ -1,0 +1,267 @@
+{
+  "project": "Gatherly Event Registration System",
+  "startedAt": "2026-09-15T09:29:47.220Z",
+  "finishedAt": "2026-09-15T09:34:04.729Z",
+  "status": "PASSED",
+  "checks": [
+    {
+      "id": "CHK-01",
+      "title": "Strict TypeScript validation",
+      "command": "pnpm typecheck",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 48375,
+      "outputTail": "$ tsc --noEmit"
+    },
+    {
+      "id": "CHK-02",
+      "title": "Business rule tests",
+      "command": "pnpm test",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 2388,
+      "outputTail": "ve duplicate is rejected (16.2668ms)\n✔ RULE-07 Full event is rejected (19.8458ms)\n✔ RULE-08 Capacity cannot produce a negative seat count (15.5862ms)\n✔ RULE-09 Remaining seats are calculated correctly (22.6495ms)\n✔ RULE-10 Zero capacity is rejected (21.6443ms)\n✔ RULE-11 Negative capacity is rejected (17.9174ms)\n✔ RULE-12 Event starting now is rejected (17.8419ms)\nℹ tests 12\nℹ suites 0\nℹ pass 12\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 539.0539\n\n$ node --test tests/rules.test.mjs"
+    },
+    {
+      "id": "CHK-03",
+      "title": "Production build",
+      "command": "pnpm build",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 185548,
+      "outputTail": "        117 kB\n├ ƒ /events/[id]                         4.35 kB         126 kB\n├ ƒ /login                               3.21 kB         119 kB\n└ ƒ /register                            3.21 kB         119 kB\n+ First Load JS shared by all             103 kB\n  ├ chunks/127-c87441890e41e2d8.js       46.4 kB\n  ├ chunks/251bdf5a-92b60c21e3e5a5f0.js  54.2 kB\n  └ other shared chunks (total)          2.05 kB\n\n\nƒ  (Dynamic)  server-rendered on demand\n\n\n$ node scripts/prisma-generate-safe.mjs && next build"
+    },
+    {
+      "id": "CHK-04",
+      "title": "Reset local demo data for deterministic acceptance fixtures",
+      "command": "pnpm db:seed",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 8351,
+      "outputTail": "Running seed command `node prisma/seed.mjs` ...\nDemo data is ready.\nAdmin: admin@example.com / Admin123!\nAttendee: alex@example.com / Attendee123!\n\nThe seed command has been executed.\n\n$ prisma db seed\nwarn The configuration property `package.json#prisma` is deprecated and will be removed in Prisma 7. Please migrate to a Prisma config file (e.g., `prisma.config.ts`).\nFor more information, see: https://pris.ly/prisma-config\n\nEnvironment variables loaded from .env"
+    },
+    {
+      "id": "CHK-05",
+      "title": "Recorded PRD acceptance cases",
+      "command": "pnpm test:e2e",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 7759,
+      "outputTail": "PRD acceptance cases passed and recorded: 10 cases.\n\n$ node tests/e2e.mjs"
+    }
+  ],
+  "suites": [
+    {
+      "suite": "Gatherly business rules",
+      "command": "pnpm test",
+      "environment": "local",
+      "startedAt": "2026-09-15T09:30:37.591Z",
+      "finishedAt": "2026-09-15T09:30:37.835Z",
+      "status": "PASSED",
+      "totals": {
+        "cases": 12,
+        "passed": 12,
+        "failed": 0
+      },
+      "cases": [
+        {
+          "id": "RULE-01",
+          "title": "Valid future event is allowed",
+          "expected": "Registration rule accepts a published future event with available capacity",
+          "actual": "Assertions completed successfully",
+          "status": "PASS",
+          "durationMs": 1
+        },
+        {
+          "id": "RULE-02",
+          "title": "Missing event is rejected",
+          "expected": "EVENT_NOT_FOUND",
+          "actual": "Assertions completed successfully",
+          "status": "PASS",
+          "durationMs": 2
+        },
+        {
+          "id": "RULE-03",
+          "title": "Unpublished event is rejected",
+          "expected": "REGISTRATION_CLOSED for DRAFT",
+          "actual": "Assertions completed successfully",
+          "status": "PASS",
+          "durationMs": 0
+        },
+        {
+          "id": "RULE-04",
+          "title": "Cancelled event is rejected",
+          "expected": "REGISTRATION_CLOSED for CANCELLED",
+          "actual": "Assertions completed successfully",
+          "status": "PASS",
+          "durationMs": 0
+        },
+        {
+          "id": "RULE-05",
+          "title": "Past event is rejected",
+          "expected": "EVENT_STARTED",
+          "actual": "Assertions completed successfully",
+          "status": "PASS",
+          "durationMs": 0
+        },
+        {
+          "id": "RULE-06",
+          "title": "Active duplicate is rejected",
+          "expected": "ALREADY_REGISTERED",
+          "actual": "Assertions completed successfully",
+          "status": "PASS",
+          "durationMs": 0
+        },
+        {
+          "id": "RULE-07",
+          "title": "Full event is rejected",
+          "expected": "EVENT_FULL",
+          "actual": "Assertions completed successfully",
+          "status": "PASS",
+          "durationMs": 1
+        },
+        {
+          "id": "RULE-08",
+          "title": "Capacity cannot produce a negative seat count",
+          "expected": "Remaining seats are clamped to zero",
+          "actual": "Assertions completed successfully",
+          "status": "PASS",
+          "durationMs": 1
+        },
+        {
+          "id": "RULE-09",
+          "title": "Remaining seats are calculated correctly",
+          "expected": "10 capacity minus 4 registrations equals 6 seats",
+          "actual": "Assertions completed successfully",
+          "status": "PASS",
+          "durationMs": 0
+        },
+        {
+          "id": "RULE-10",
+          "title": "Zero capacity is rejected",
+          "expected": "EVENT_FULL",
+          "actual": "Assertions completed successfully",
+          "status": "PASS",
+          "durationMs": 0
+        },
+        {
+          "id": "RULE-11",
+          "title": "Negative capacity is rejected",
+          "expected": "EVENT_FULL",
+          "actual": "Assertions completed successfully",
+          "status": "PASS",
+          "durationMs": 0
+        },
+        {
+          "id": "RULE-12",
+          "title": "Event starting now is rejected",
+          "expected": "EVENT_STARTED",
+          "actual": "Assertions completed successfully",
+          "status": "PASS",
+          "durationMs": 0
+        }
+      ]
+    },
+    {
+      "suite": "Gatherly PRD acceptance cases",
+      "command": "pnpm test:e2e",
+      "environment": "local application and database",
+      "startedAt": "2026-09-15T09:33:58.428Z",
+      "finishedAt": "2026-09-15T09:34:04.482Z",
+      "status": "PASSED",
+      "totals": {
+        "cases": 10,
+        "passed": 10,
+        "failed": 0
+      },
+      "cases": [
+        {
+          "id": "PRD-01",
+          "title": "Register for an event",
+          "expected": "An attendee signs in, registers for a published event with places, sees confirmation, and one place is removed.",
+          "actual": "Registration HTTP 201; confirmation shown; remaining seats changed from 3 to 2",
+          "status": "PASS",
+          "durationMs": 2222
+        },
+        {
+          "id": "PRD-02",
+          "title": "Publish an event",
+          "expected": "A draft is hidden from attendees before publishing and visible after an admin publishes it.",
+          "actual": "Draft detail/list hidden before publication; attendee HTTP 200 after status changed to PUBLISHED",
+          "status": "PASS",
+          "durationMs": 192
+        },
+        {
+          "id": "PRD-03",
+          "title": "Register twice",
+          "expected": "The same attendee cannot create a second active registration for the same event, and only one registration remains.",
+          "actual": "Second registration HTTP 409 with ALREADY_REGISTERED; active registrations for event: 1",
+          "status": "PASS",
+          "durationMs": 62
+        },
+        {
+          "id": "PRD-04",
+          "title": "Full event",
+          "expected": "After all places are taken, an extra attendee is blocked and the event reports no places left.",
+          "actual": "First registration HTTP 201; extra registration HTTP 409 with EVENT_FULL; event shows full",
+          "status": "PASS",
+          "durationMs": 1021
+        },
+        {
+          "id": "PRD-05",
+          "title": "Closed or past event",
+          "expected": "Registrations for cancelled, completed, and past-date events are all blocked.",
+          "actual": "Cancelled, completed, and past-date attempts all returned HTTP 409 with the expected closed/started reasons",
+          "status": "PASS",
+          "durationMs": 451
+        },
+        {
+          "id": "PRD-06",
+          "title": "Cancel a registration",
+          "expected": "Cancelling one registration on a full event frees the place and lets a different attendee register.",
+          "actual": "Cancellation HTTP 200; replacement attendee registration HTTP 201; place was reused",
+          "status": "PASS",
+          "durationMs": 125
+        },
+        {
+          "id": "PRD-07",
+          "title": "Wrong capacity",
+          "expected": "Zero, negative, decimal, and below-current-registration capacities are rejected with clear validation.",
+          "actual": "0, -1, and 2.5 returned HTTP 422 field errors; capacity below two active registrations returned CAPACITY_TOO_LOW",
+          "status": "PASS",
+          "durationMs": 544
+        },
+        {
+          "id": "PRD-08",
+          "title": "Attendee tries admin actions",
+          "expected": "An attendee cannot open admin pages or perform admin mutations, including a direct request.",
+          "actual": "Admin page redirected with HTTP 307; direct event mutation blocked with HTTP 403 by the server",
+          "status": "PASS",
+          "durationMs": 170
+        },
+        {
+          "id": "PRD-09",
+          "title": "Someone else's registration",
+          "expected": "An attendee cannot open or receive another attendee's registration details.",
+          "actual": "Own registration HTTP 200; another attendee's registration HTTP 403; private details omitted",
+          "status": "PASS",
+          "durationMs": 30
+        },
+        {
+          "id": "PRD-10",
+          "title": "Attendee list and totals",
+          "expected": "After three registrations and one cancellation, the event list shows two active attendees, search/export/copy controls are available, and dashboard totals survive refresh.",
+          "actual": "Event-scoped admin list shows 2 active attendees after one cancellation; search/copy/CSV controls present; dashboard active total 14 stayed unchanged after refresh",
+          "status": "PASS",
+          "durationMs": 1206
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "commandChecks": 5,
+    "commandChecksPassed": 5,
+    "individualCases": 22,
+    "individualCasesPassed": 22
+  }
+}
