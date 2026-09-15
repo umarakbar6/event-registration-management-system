@@ -122,6 +122,20 @@ async function main() {
       createdById: admin.id,
     },
   });
+  await prisma.event.create({
+    data: {
+      title: "Historical Registration Fixture",
+      description: "A published event retained to verify that past dates cannot accept registrations.",
+      location: "Archive Hall, Nowshera",
+      startDateTime: daysFromNow(-2, 10),
+      endDateTime: daysFromNow(-2, 12),
+      capacity: 20,
+      status: "PUBLISHED",
+      category: "Testing",
+      imageUrl: null,
+      createdById: admin.id,
+    },
+  });
 
   await prisma.registration.createMany({
     data: [
