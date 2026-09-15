@@ -10,6 +10,24 @@ import { registrationStatusSchema } from "@/lib/validation";
 
 type Context = { params: Promise<{ id: string }> };
 
+export async function GET(_request: NextRequest, context: Context) {
+  try {
+    const user = await requireUser();
+    const { id } = await context.params;
+    const registration = await prisma.registration.findUnique({
+      where: { id },
+      include: { event: true, user: { select: { id: true, name: true, email: true } } },
+    });
+    if (!registration) throw new AppError("REGISTRATION_NOT_FOUND", "Registration not found.", 404);
+    if (user.role !== "ADMIN" && registration.userId !== user.id) {
+      throw new AppError("FORBIDDEN", "You can only view your own registrations.", 403);
+    }
+    return success({ registration: serializeRegistration(registration) });
+  } catch (error) {
+    return errorResponse(error);
+  }
+}
+
 export async function DELETE(request: NextRequest, context: Context) {
   try {
     requireCsrf(request);
@@ -34,7 +52,7 @@ export async function PATCH(request: NextRequest, context: Context) {
     const wasActive = current.status === "ACTIVE";
     const willBeActive = nextStatus === "ACTIVE";
     const registration = await prisma.$transaction(async (transaction) => {
-      if (wasActive && !willBeActive) await transaction.event.updateMany({ where: { id: current.eventId, seatsTaken: { gt: 0 } }, data: { seatsTaken: { decrement: 1 } } });
+      if (wasActive && !willBeActive) await transaction.event.updateMany({ where: { id: current.eventId, seatsTaken: { gt: 0 } } , data: { seatsTaken: { decrement: 1 } } });
       if (!wasActive && willBeActive) {
         const reserved = await transaction.event.updateMany({ where: { id: current.eventId, seatsTaken: { lt: current.event.capacity }, status: "PUBLISHED", startDateTime: { gt: new Date() } }, data: { seatsTaken: { increment: 1 } } });
         if (reserved.count !== 1) return null;
