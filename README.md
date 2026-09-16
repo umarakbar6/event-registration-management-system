@@ -87,9 +87,9 @@ Open `http://localhost:3000`.
 
 These accounts are for local development only.
 
-Admin: `admin@example.com` with password `Admin123!`
+Admin: `admin@nowshera-events.pk` with password `NowsheraAdmin123!`
 
-Attendee: `alex@example.com` with password `Attendee123!`
+Attendee: `ahmad@nowshera-events.pk` with password `NowsheraAttendee123!`
 
 More attendees are created by the seed script. Change or remove these credentials before any shared deployment.
 
@@ -111,7 +111,7 @@ Mutation requests must include the `x-csrf-token` header returned by `GET /api/a
 
 ## Tests and checks
 
-Run the critical registration rule tests with `pnpm test`. Run the strict TypeScript check with `pnpm typecheck`. Build production output with `pnpm build` and start it with `pnpm start`.
+Run the critical registration rule tests with `pnpm test`. Run the strict TypeScript check with `pnpm typecheck`. Build production output with `pnpm build` and start it with `pnpm start`. Run `pnpm test:record` to execute the complete verification pass and generate individual test evidence in `docs/test-records/latest.md`.
 
 ## Security notes
 
