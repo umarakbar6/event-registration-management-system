@@ -10,20 +10,20 @@ async function main() {
   await prisma.session.deleteMany();
   await prisma.user.deleteMany();
 
-  const adminPassword = await bcrypt.hash("Admin123!", 12);
-  const attendeePassword = await bcrypt.hash("Attendee123!", 12);
+  const adminPassword = await bcrypt.hash("NowsheraAdmin123!", 12);
+  const attendeePassword = await bcrypt.hash("NowsheraAttendee123!", 12);
 
   const admin = await prisma.user.create({
-    data: { name: "System Administrator", email: "admin@example.com", passwordHash: adminPassword, role: "ADMIN" },
+    data: { name: "Nowshera Events Admin", email: "admin@nowshera-events.pk", passwordHash: adminPassword, role: "ADMIN" },
   });
   const alex = await prisma.user.create({
-    data: { name: "Alex Morgan", email: "alex@example.com", passwordHash: attendeePassword, role: "ATTENDEE" },
+    data: { name: "Ahmad Khan", email: "ahmad@nowshera-events.pk", passwordHash: attendeePassword, role: "ATTENDEE" },
   });
   const maya = await prisma.user.create({
-    data: { name: "Maya Patel", email: "maya@example.com", passwordHash: attendeePassword, role: "ATTENDEE" },
+    data: { name: "Ayesha Khan", email: "ayesha@nowshera-events.pk", passwordHash: attendeePassword, role: "ATTENDEE" },
   });
   const jordan = await prisma.user.create({
-    data: { name: "Jordan Lee", email: "jordan@example.com", passwordHash: attendeePassword, role: "ATTENDEE" },
+    data: { name: "Hamza Ali", email: "hamza@nowshera-events.pk", passwordHash: attendeePassword, role: "ATTENDEE" },
   });
 
   const now = new Date();
@@ -122,20 +122,6 @@ async function main() {
       createdById: admin.id,
     },
   });
-  await prisma.event.create({
-    data: {
-      title: "Historical Registration Fixture",
-      description: "A published event retained to verify that past dates cannot accept registrations.",
-      location: "Archive Hall, Nowshera",
-      startDateTime: daysFromNow(-2, 10),
-      endDateTime: daysFromNow(-2, 12),
-      capacity: 20,
-      status: "PUBLISHED",
-      category: "Testing",
-      imageUrl: null,
-      createdById: admin.id,
-    },
-  });
 
   await prisma.registration.createMany({
     data: [
@@ -156,8 +142,8 @@ async function main() {
   });
 
   console.log("Demo data is ready.");
-  console.log("Admin: admin@example.com / Admin123!");
-  console.log("Attendee: alex@example.com / Attendee123!");
+  console.log("Admin: admin@nowshera-events.pk / NowsheraAdmin123!");
+  console.log("Attendee: ahmad@nowshera-events.pk / NowsheraAttendee123!");
 }
 
 main().catch((error) => {
