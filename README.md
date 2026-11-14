@@ -87,9 +87,9 @@ Open `http://localhost:3000`.
 
 These accounts are for local development only.
 
-Admin: `admin@nowshera-events.pk` with password `NowsheraAdmin123!`
+Admin: `admin@nowshera-events.pk` with password `[private seed password from environment]`
 
-Attendee: `ahmad@nowshera-events.pk` with password `NowsheraAttendee123!`
+Attendee: `ahmad@nowshera-events.pk` with password `[private seed password from environment]`
 
 More attendees are created by the seed script. Change or remove these credentials before any shared deployment.
 
@@ -118,3 +118,7 @@ Run the critical registration rule tests with `pnpm test`. Run the strict TypeSc
 Passwords are never stored directly. Session tokens are random opaque values and only keyed HMAC SHA 256 hashes are stored. Session cookies are HTTP only and same site. Mutations use a double submit CSRF token. Input is validated with Zod. Database access uses Prisma parameters. Attendee queries are scoped to the signed in user, while admin access is checked on the server. Errors returned to the browser are sanitized.
 
 Set `secure` cookies through production HTTPS, use a strong secret, use a managed PostgreSQL service, restrict database access, and configure backups before a public deployment.
+
+## Safe demo seeding
+
+Seeding deletes demo records. It requires ALLOW_DEMO_SEED=true, a non-production NODE_ENV, and a local DATABASE_URL. Configure distinct SEED_ADMIN_PASSWORD and SEED_ATTENDEE_PASSWORD values privately, each 12 to 72 bytes. No default passwords are embedded or printed. Reset accounts in any earlier deployment that used the previously published demo passwords; changing source does not change an existing database.

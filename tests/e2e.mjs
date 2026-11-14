@@ -140,7 +140,7 @@ try {
   });
 
   await recorder.case("E2E-10", "Admin login and live statistics", "Admin can sign in and read real statistics", async () => {
-    const login = await admin.json("/api/auth/login", "POST", { email: "admin@nowshera-events.pk", password: "NowsheraAdmin123!" });
+    const login = await admin.json("/api/auth/login", "POST", { email: "admin@nowshera-events.pk", password: process.env.SEED_ADMIN_PASSWORD });
     assert.equal(login.response.status, 200);
     const stats = await admin.request("/api/admin/statistics");
     assert.equal(stats.response.status, 200);
