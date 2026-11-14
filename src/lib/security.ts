@@ -5,10 +5,12 @@ import { AppError } from "./errors";
 export const sessionCookieName = "event_session";
 export const csrfCookieName = "event_csrf";
 
+const developmentSecret = randomBytes(32).toString("hex");
+
 function authSecret() {
   const secret = process.env.AUTH_SECRET;
-  if (!secret && process.env.NODE_ENV === "production") throw new Error("AUTH_SECRET is required in production.");
-  return secret || "local development secret";
+  if ((!secret || secret.length < 32) && process.env.NODE_ENV === "production") throw new Error("AUTH_SECRET must contain at least 32 characters in production.");
+  return secret || developmentSecret;
 }
 
 export function createOpaqueToken() {

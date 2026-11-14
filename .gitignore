@@ -9,3 +9,14 @@ prisma/dev.db
 prisma/dev.db-journal
 work/
 *.tsbuildinfo
+
+# Local credentials and generated runtime files
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+node_modules/
+.venv/
+__pycache__/
+*.pyc

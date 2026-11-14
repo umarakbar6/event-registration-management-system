@@ -1,5 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
+import { demoSeedSettings } from "./seed-settings.mjs";
+const seedConfiguration = demoSeedSettings();
 
 const prisma = new PrismaClient();
 
@@ -10,8 +12,8 @@ async function main() {
   await prisma.session.deleteMany();
   await prisma.user.deleteMany();
 
-  const adminPassword = await bcrypt.hash("NowsheraAdmin123!", 12);
-  const attendeePassword = await bcrypt.hash("NowsheraAttendee123!", 12);
+  const adminPassword = await bcrypt.hash(seedConfiguration.adminPassword, 12);
+  const attendeePassword = await bcrypt.hash(seedConfiguration.attendeePassword, 12);
   const admin = await prisma.user.create({ data: { name: "Nowshera Events Admin", email: "admin@nowshera-events.pk", passwordHash: adminPassword, role: "ADMIN" } });
   const alex = await prisma.user.create({ data: { name: "Ahmad Khan", email: "ahmad@nowshera-events.pk", passwordHash: attendeePassword, role: "ATTENDEE" } });
   const maya = await prisma.user.create({ data: { name: "Ayesha Khan", email: "ayesha@nowshera-events.pk", passwordHash: attendeePassword, role: "ATTENDEE" } });
@@ -26,9 +28,9 @@ async function main() {
   const summit = await prisma.event.create({ data: { title: "Responsible Technology Summit", description: "A completed day of talks and workshops about building technology with care.", location: "Innovation Center, Nowshera", startDateTime: daysFromNow(-30, 10), endDateTime: daysFromNow(-30, 17), capacity: 100, seatsTaken: 2, status: "COMPLETED", category: "Technology", imageUrl: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=85", createdById: admin.id } });
   await prisma.registration.createMany({ data: [{ userId: alex.id, eventId: forum.id, status: "ACTIVE" }, { userId: maya.id, eventId: forum.id, status: "ACTIVE" }, { userId: alex.id, eventId: breakfast.id, status: "ACTIVE" }, { userId: maya.id, eventId: breakfast.id, status: "ACTIVE" }, { userId: jordan.id, eventId: breakfast.id, status: "ACTIVE" }, { userId: alex.id, eventId: fullEvent.id, status: "ACTIVE" }, { userId: maya.id, eventId: fullEvent.id, status: "ACTIVE" }, { userId: jordan.id, eventId: fullEvent.id, status: "ACTIVE" }, { userId: alex.id, eventId: summit.id, status: "ATTENDED" }, { userId: maya.id, eventId: summit.id, status: "ATTENDED" }] });
   await prisma.feedback.create({ data: { userId: alex.id, eventId: summit.id, rating: 5, comment: "A thoughtful and well run event. The practical sessions were excellent." } });
-  console.log("Demo data is ready.");
-  console.log("Admin: admin@nowshera-events.pk / NowsheraAdmin123!");
-  console.log("Attendee: ahmad@nowshera-events.pk / NowsheraAttendee123!");
+  console.log("Demo data created. Use the private seed credentials from your environment.");
+  console.log("Demo data created. Use the private seed credentials from your environment.");
+  console.log("Demo data created. Use the private seed credentials from your environment.");
 }
 
 main().catch((error) => { console.error(error); process.exit(1); }).finally(async () => { await prisma.$disconnect(); });

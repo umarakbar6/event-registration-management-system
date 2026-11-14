@@ -44,9 +44,9 @@ The current passing run contains 12 business rule cases and 17 API acceptance ca
 
 These are development credentials only.
 
-Admin: `admin@nowshera-events.pk` with password `NowsheraAdmin123!`
+Admin: `admin@nowshera-events.pk` with password `[private seed password from environment]`
 
-Attendee: `ahmad@nowshera-events.pk` with password `NowsheraAttendee123!`
+Attendee: `ahmad@nowshera-events.pk` with password `[private seed password from environment]`
 
 ## Known limitations and honest handover notes
 

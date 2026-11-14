@@ -1,5 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
+import { demoSeedSettings } from "./seed-settings.mjs";
+const seedConfiguration = demoSeedSettings();
 
 const prisma = new PrismaClient();
 
@@ -10,8 +12,8 @@ async function main() {
   await prisma.session.deleteMany();
   await prisma.user.deleteMany();
 
-  const adminPassword = await bcrypt.hash("NowsheraAdmin123!", 12);
-  const attendeePassword = await bcrypt.hash("NowsheraAttendee123!", 12);
+  const adminPassword = await bcrypt.hash(seedConfiguration.adminPassword, 12);
+  const attendeePassword = await bcrypt.hash(seedConfiguration.attendeePassword, 12);
 
   const admin = await prisma.user.create({
     data: { name: "Nowshera Events Admin", email: "admin@nowshera-events.pk", passwordHash: adminPassword, role: "ADMIN" },
@@ -141,9 +143,9 @@ async function main() {
     data: { userId: alex.id, eventId: summit.id, rating: 5, comment: "A thoughtful and well run event. The practical sessions were excellent." },
   });
 
-  console.log("Demo data is ready.");
-  console.log("Admin: admin@nowshera-events.pk / NowsheraAdmin123!");
-  console.log("Attendee: ahmad@nowshera-events.pk / NowsheraAttendee123!");
+  console.log("Demo data created. Use the private seed credentials from your environment.");
+  console.log("Demo data created. Use the private seed credentials from your environment.");
+  console.log("Demo data created. Use the private seed credentials from your environment.");
 }
 
 main().catch((error) => {

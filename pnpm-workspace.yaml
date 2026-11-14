@@ -3,3 +3,11 @@ allowBuilds:
   '@prisma/engines': true
   esbuild: true
   prisma: true
+
+overrides:
+  postcss: 8.5.23
+  deepmerge-ts: 8.0.0
+  sharp: 0.35.5
+  tinypool: 2.1.2
+  source-map-js: 1.2.2
+  postcss-selector-parser: 6.1.5
